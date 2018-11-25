@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>ezquiz.com</title>
+<meta name="description" content="Teste tip quiz din diferite domenii">
+<link rel="stylesheet" type="text/css" href="quiz.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="quiz.js"></script> 
+</head>
+
+<body onload= "user();">
+<div id="header"><h1>ezquiz.com</h1></div>
+<div id="navbar"> 
+        <div id="menu">
+            <a href="/quiz">Quizes</a>
+            <a href="/challenge">Challenge</a>
+            <a href="/top" onclick="topPlayers()">Top players</a>
+            <a href="/info">Info</a>
+        </div>
+        <div id="profileLog">	
+            <% if(user !== undefined){ %>
+                <a href="/profile" class="user"><%= user.username %></a>
+                <a href="/logout" >Logout</a>
+            <% } else { %>
+                <a href="/signup">Sign Up</a>
+                <a href="/login">Log in</a>
+            <% }%>
+            </div>	
+</div>
+<div id="info">
+    <h1 style="color:red"> Doar userii logati pot accesa continutul testelor de tip quiz! </h1>
+    <h2>Despre</h2>
+    <p>
+    ezquiz.com este locul unde iti poti testa cunostintele din variate domeniile, intr-un mod interactiv.
+    Site-ul dispune de doua moduri in care utilizatorii pot realiza quiz-uri: teste in care timpul
+    nu se contorizeaza, si teste in care timpul are importanta. Intreabarile sunt de tip grila, cu 
+    variante de raspuns in numar variabil, iar odata ce ai ales un raspuns nu te mai poti razgandi: vei trece automat
+    la urmatoarea intrebare. Asa ca gandeste-te bine! Dupa fiecare quiz, iti va fi aratat la sfarsit scorul 
+    final.</p>
+    <hr>
+    <h2>Quizes</h2>
+    <p>
+    Timpul nu are importanta aici. Iti poti alege orice domeniu doresti din cele disponibile, iar dupa ce te-ai asigurat 
+    ca raspunsul pe care il alegi este cel pe care il consideri corect, selectandu-l, vei trece la urmatoare intrebare.
+    Deasupra quiz-ului este o bara care iti va arata progresul in ceea ce priveste numarul de intrebari la care ai raspuns.
+    Recomandam aceste teste, pentru antrenament, pana la incerea celor de tip challenge. Sunt sanse mari ca acolo sa intalnesti unele 
+    dintre aceste intrebari.</p>
+<hr>
+    <h2>Challenge</h2>
+
+    <p>
+    Competitia scoate de cele mai multe ori tot ce e mai bun din oameni, iar acest tip de quiz antreneaza competitia.
+    Intr-un timp de aproximativ 5 secunde trebuie sa raspunzi la intrebarea care iti este afisata, in caz contrar raspunsul se va considera
+    gresit, si vei trece la urmatoarea intrebare. Ai grija, ai cel mult 3 vieti la dispozitie!
+    Raspunzi gresit de 3 ori, quiz-ul se incheie. Cei mai buni jucatori la aceasta categorie vor fi afisati 
+    in sectiunea <b>Top players</b>. </p>
+<hr>
+
+    <h2>Top players</h2>
+    <p>
+    Aici este locul unde speram sa te afli cat mai sus. Cei mai buni jucatori de la challenge vor fi afisati 
+    in ordinea descrescatoare a scorurilor. Cei mai buni sunt primii. Intotdeauna.
+    </p>
+
+<hr>
+    <h2>Profil</h2>
+    <p>
+    In cadrul profilului vei putea observa evolutia ta in cadrul testelor. Vei putea vedea, 
+    in functie de subiect, cum te descurci la fiecare dintre acestea, si cum progresezi.
+    </p>
+
+<hr>
+    <h2>Final thoughts </h2>
+    <p>
+    Daca inca nu ai cont, <a href="/signup" style="text-decoration: none; color: red">inscrie-te</a>. Daca ai cont, da-i bataie si urca in topul celor mai buni jucatori.
+    <b style="color:green"> Multa bafta!</b></p>
+</div>
+<div id="footer"></div>
+</body>
+</html>

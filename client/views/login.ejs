@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ezquiz.com</title>
+<meta name="description" content="Teste tip quiz din diferite domenii">
+<link rel = "stylesheet" type = "text/css" href = "quiz.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="quiz.js"></script>
+</head>
+<body>
+<div id="header"><h1>ezquiz.com</h1></div>
+<div id="navbar"> 
+		<div id="menu">
+			<a href="/quiz">Quizes</a>
+			<a href="/challenge">Challenge</a>
+			<a href="/top" onclick="topPlayers()">Top players</a>
+			<a href="/info">Info</a>
+		</div>
+		<div id="profileLog">	
+			<% if(user !== undefined){ %>
+                <a href="/profile" class="user"><%= user.username %></a>
+                <a href="/logout" >Logout</a>
+            <% } else { %>
+                <a href="/signup">Sign Up</a>
+                <a href="/login">Log in</a>
+            <% }%>
+			</div>	
+	</div>
+<div id="login">
+	<form class="loginForm" id="logg" action="/login" method="post">
+	<b>Username:</b><br>
+		<input type="text" name="username" placeholder="username" required><br>
+	<b>Password:</b><br>
+		<input type="password" name="password" placeholder="password" required><br>
+		<p id="error" style="color: red;"><%= message %></p>
+	<input class="but" type="submit" value="Login"><br>
+	</form>
+	<div>
+		Nu ai cont? <br>
+		<button onclick="location.href='/signup'">Sign up</button><br>
+		<p>Ti-ai uitat <a href="" style="text-decoration: none; color: tomato;"> parola</a>?</p>
+	</div>
+</div>
+<div id="footer"></div>
+</body>
+</html>
