@@ -5,6 +5,7 @@
 <title>ezquiz.com</title>
 <meta name="description" content="Teste tip quiz din diferite domenii">
 <link rel="stylesheet" type="text/css" href="quiz.css">
+<link rel="stylesheet" type="text/css" href="info.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="quiz.js"></script> 
 </head>
@@ -17,6 +18,9 @@
             <a href="/challenge">Challenge</a>
             <a href="/top" onclick="topPlayers()">Top players</a>
             <a href="/info">Info</a>
+            <% if(user !== undefined && user.admin === 1) { %>
+			<a href="/modify">Adauga/Modifica</a>
+			<% } %>
         </div>
         <div id="profileLog">	
             <% if(user !== undefined){ %>
@@ -51,8 +55,8 @@
 
     <p>
     Competitia scoate de cele mai multe ori tot ce e mai bun din oameni, iar acest tip de quiz antreneaza competitia.
-    Intr-un timp de aproximativ 5 secunde trebuie sa raspunzi la intrebarea care iti este afisata, in caz contrar raspunsul se va considera
-    gresit, si vei trece la urmatoarea intrebare. Ai grija, ai cel mult 3 vieti la dispozitie!
+    Intr-un timp de aproximativ 7 secunde trebuie sa raspunzi la intrebarea care iti este afisata, in caz contrar raspunsul se va considera
+    gresit, si vei trece la urmatoarea intrebare. La aceasta categorie de quiz nu iti poti alege subiectul. Intrebarile vor fi variate. Ai grija, ai cel mult 3 vieti la dispozitie!
     Raspunzi gresit de 3 ori, quiz-ul se incheie. Cei mai buni jucatori la aceasta categorie vor fi afisati 
     in sectiunea <b>Top players</b>. </p>
 <hr>

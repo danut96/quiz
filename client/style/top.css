@@ -1,0 +1,30 @@
+/* ------------------------------------- TOP PLAYERS -------------------------------------*/
+
+#topPlayers{
+	margin: 0px;
+	background-color: white;
+	height: 600px;
+	}
+
+#top10{
+	font-size: 20px;
+	position: relative;
+	margin: auto;
+	top: 15%;
+	text-align: center;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#top10 th{
+	padding: 5px;
+	font-size: 25px;
+	background-color: #73B66B;
+	border: 1px solid black;
+}
+
+#top10 td{
+	padding: 5px;
+	border: 1px solid black;
+}
+

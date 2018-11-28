@@ -5,12 +5,13 @@
 <title>ezquiz.com</title>
 <meta name="description" content="Teste tip quiz din diferite domenii">
 <link rel="stylesheet" type="text/css" href="quiz.css">
+<link rel="stylesheet" type="text/css" href="profile.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="quiz.js"></script> 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
-<body onload="profilePage();">
+<body onload="user();">
 <div id="header"><h1>ezquiz.com</h1></div>
 <div id="navbar"> 
 		<div id="menu">
@@ -18,6 +19,9 @@
 			<a href="/challenge">Challenge</a>
 			<a href="/top" onclick="topPlayers()">Top players</a>
 			<a href="/info">Info</a>
+			<% if(user !== undefined && user.admin === 1) { %>
+			<a href="/modify">Adauga/Modifica</a>
+			<% } %>
 		</div>
 		<div id="profileLog">	
 			<% if(user !== undefined){ %>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ezquiz.com</title>
+<meta name="description" content="Teste tip quiz din diferite domenii">
+<link rel = "stylesheet" type = "text/css" href = "quiz.css">
+<link rel = "stylesheet" type = "text/css" href = "admin.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="quiz.js"></script>
+<script type="text/javascript" src="admin.js"></script>
+</head>
+<body onload="user();">
+<div id="header"><h1>ezquiz.com</h1></div>
+<div id="navbar"> 
+        <div id="menu">
+            <a href="/quiz">Quizes</a>
+            <a href="/challenge">Challenge</a>
+            <a href="/top" onclick="topPlayers()">Top players</a>
+            <a href="/info">Info</a>
+            <% if(user !== undefined && user.admin === 1) { %>
+			<a href="/modify">Adauga/Modifica</a>
+			<% } %>
+        </div>
+        <div id="profileLog">	
+            <% if(user !== undefined){ %>
+                <a href="/profile" class="user"><%= user.username %></a>
+                <a href="/logout" >Logout</a>
+            <% } else { %>
+                <a href="/signup">Sign Up</a>
+                <a href="/login">Log in</a>
+            <% }%>
+        </div>	
+</div>
+<div id="message" style="font-size:25px; color: green; text-align: center; background-color: white;"><% if(locals.success === 1){ %> Modificare cu succes <%}%></div>
+<div id="addQuest">
+    <button onclick="addSub();"> Adauga un subiect nou </button>
+    <button onclick="addQuest();"> Adauga o noua intrebare </button>
+    <button> Modifica un subiect/intrebare </button>
+    <button> Sterge subiecte/intrebari </button>
+    <button onclick="deleteUser();"> Sterge un user </button>
+    <button onclick="admin();"> Acorda drept de admin </button>
+</div>
+<div id="selected" style="display:none">
+    <form id="addsubject" action="/addsubject", method="get" style="display:none">
+        <input type="text" name="subject" placeholder="adauga un subiect nou" required><br>
+        <input class="add" type="submit" value=" + ">
+    </form>
+    
+    <form id="addquestion" action="/addquestion", method="get" style="display:none">
+    <select name="subject" form="addquestion" id="selectSubj">Alege subiectul intrebarii</select> <br>
+        <input type="text" name="question" placeholder="adauga o noua intrebare" required><br>
+        <div id="ans" >
+        </div><br>
+        <input class="add" type="submit" value=" + ">
+    </form>
+    <form id="deleteuser" action="/deleteuser", method="get" style="display:none">
+        <input type="text" name="username" placeholder="introdu numele userului" required>
+        <input class="add" type="submit" value=" - ">
+    </form>
+    <form id="administrator" action="/administrator", method="get" style="display:none">
+        <input type="text" name="username" placeholder="introdu numele userului" required>
+        <input class="add" type="submit" value=" + ">
+    </form>
+</div>
+    
+<div id="footer"></div>
+</body>
+</html>

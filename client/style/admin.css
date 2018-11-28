@@ -1,0 +1,67 @@
+/* ------------------------------------------- ADMIN PAGE -------------------------------------------------*/
+
+#addQuest{
+	background-color: white;
+	margin: 0px;
+	padding: 10px;
+}
+
+#addQuest button{
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 25px;
+	width: 100%;
+	font-size: 25px;
+	border: none;
+	background-color: #73B66B;
+}
+
+#addQuest button:hover{
+	background-color: #3e8e41;
+}
+
+#selected{
+	background-color: white;
+	width: 100%;
+	padding: 30px;
+}
+
+#addsubject, #addquestion, #deleteuser, #administrator{
+	background-color: white;
+	width: 430px;
+	margin: auto;
+	/* padding: 20px; */
+	/* margin-left: 18%;
+	margin-right: 19%; */
+}
+
+#deleteuser input, #addsubject input, #addquestion input, #administrator input{
+	border-style: 1px solid green;
+	margin: auto;
+	padding: 25px;
+	display: inline;
+	font-size: 25px;
+	margin: 5px;
+}
+
+
+.add{
+	width: 80px;
+	margin: auto;
+	font-size: 25px;
+	display: block;
+	border: none;
+	background-color: #73B66B;
+	outline: none;
+}
+
+#selectSubj{
+	background-color: #73B66B;
+	width: 430px;
+	padding: 20px;
+	font-size: 25px;
+	margin: auto;
+	outline: none;
+}

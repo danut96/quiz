@@ -10,7 +10,9 @@ var flash = require('connect-flash');
 
 
 app.set('views',  'client/views');
-app.use(express.static('static'));
+app.use(express.static('client/scripts'));
+app.use(express.static('client/style'));
+app.use(express.static('client/assets'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 app.set('view engine', 'ejs');

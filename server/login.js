@@ -63,6 +63,7 @@ module.exports = function(passport){
                         if(err) throw err;
                         if(result.length === 1){
                             var newUserMysql = new Object();
+                            newUserMysql.admin = result[0].admin;
                             newUserMysql.username = username;
                             newUserMysql.password = password;
                             newUserMysql.id = result[0].id;

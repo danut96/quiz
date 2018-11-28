@@ -1,0 +1,47 @@
+/*===================================== CHALLENGE PAGE ===========================================*/
+
+#main1{
+	margin: 0px;
+	background-color: white;
+	height: 500px;
+	padding: 10px;
+}
+
+#life{
+	position: relative;
+	margin-top:0%;
+	margin-left:20%;
+	margin-right:20%;
+	margin-bottom: 15px;
+	height: 25px;
+	color:red; 
+	font-size: 25px;
+	padding: 5px;
+	text-align: right;
+}
+
+#timer{
+	position: relative;
+	/* margin-top:5%;
+	margin-left:30%;
+	margin-right:30%;
+	margin-bottom: 15px; */
+	height: 15px;
+	background-color: yellow;
+	width: 0%;
+}
+
+#timerWrap{
+	position: relative;
+	margin-top:5%;
+	margin-left:30%;
+	margin-right:30%;
+	margin-bottom: 15px;
+	height: 15px;
+	border: 1px solid black;
+}
+
+#main1 #questProgressBar{
+	display: none;
+}
+

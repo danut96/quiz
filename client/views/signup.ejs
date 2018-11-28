@@ -15,6 +15,9 @@
 			<a href="/challenge">Challenge</a>
 			<a href="/top" onclick="topPlayers()">Top players</a>
 			<a href="/info">Info</a>
+			<% if(user !== undefined && user.admin === 1) { %>
+			<a href="/modify">Adauga/Modifica</a>
+			<% } %>
 		</div>
 		<div id="profileLog">	
 				<% if(user !== undefined){ %>

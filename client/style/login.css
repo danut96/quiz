@@ -1,0 +1,93 @@
+/*================================= LOGIN PAGE STYLE ======================== */
+
+#signUp{
+	margin-top: 5%;
+	margin-left: 30%;
+	margin-right:30%;
+	margin-bottom: 5%;
+	height: 230px;
+	background-color: white;
+	padding: 26px;
+}
+
+#login{
+	margin-top: 5%;
+	margin-left: 30%;
+	margin-right:30%;
+	margin-bottom: 5%;
+	height: 350px;
+	background-color: white;
+	padding: 26px;
+}
+
+.loginForm{
+	margin: 0px;
+	background-color: white;
+	padding: 10px;
+
+}
+
+.loginForm input{
+	font-size: 16px;
+	border: 1px solid gray;
+	margin: 0px;
+	width: 100%;
+	height: 35px;
+	display:block;
+}
+
+.but{
+	border: none;
+	width: 100%;
+	background-color:  #73B66B;
+	color: white;
+}
+
+.but:hover{
+	opacity: 0.8;
+}
+
+#error{
+	padding: 2px;
+	margin: 0px;
+	text-align: center;
+	font-size: 15px;
+	height: 17px;
+}
+
+#error2{
+	padding: 2px;
+	margin: 0px;
+	text-align: center;
+	font-size: 15px;
+	height: 17px;
+}
+
+
+#login div{
+	display: block;
+	font-size: 16px;
+	text-align: center;
+	background-color: white;
+	float: bottom;
+	padding: 10px;
+}
+
+/* #login div p{ */
+	/* float: right; */
+	/* text-decoration: none; */
+/* } */
+
+#login div button{
+	font-size: 16px;
+	border: none;
+	width: 100%;
+	padding: 10px;
+	background-color:  #FF6D31;
+	color: white;
+	margin: 0px;
+}
+
+#login div button:hover{
+	opacity: 0.8;
+}

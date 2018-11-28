@@ -6,6 +6,7 @@
 <link rel = "stylesheet" type = "text/css" href = "quiz.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="quiz.js"></script>
+<script type="text/javascript" src="gameLogic.js"></script>
 </head>
 <body onload="user();">
 <div id="header"><h1>ezquiz.com</h1></div>
@@ -15,6 +16,9 @@
 		<a href="/challenge">Challenge</a>
 		<a href="/top" onclick="topPlayers()">Top players</a>
 		<a href="/info">Info</a>
+		<% if(user !== undefined && user.admin === 1) { %>
+			<a href="/modify">Adauga/Modifica</a>
+			<% } %>
 	</div>
 	<div id="profileLog">	
 		<% if(user !== undefined){ %>
