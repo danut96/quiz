@@ -57,7 +57,8 @@
 	outline: none;
 }
 
-#selectSubj{
+.selectSubj{
+
 	background-color: #73B66B;
 	width: 430px;
 	padding: 20px;
@@ -65,3 +66,35 @@
 	margin: auto;
 	outline: none;
 }
+
+#questList{
+	margin-left: 20%;
+	list-style: none;
+	padding: 20px;
+	font-size: 20px;
+}
+
+#questList li{
+	padding: 3px;
+}
+
+#questList ul{
+	margin-left: 10%;
+	padding: 5px;
+	list-style: none;
+	font-size: 20px;
+}
+
+#modify{
+	padding: 20px;
+	background-color: yellowgreen;
+	width: 200px;
+	font-size: 25px;
+	margin: auto;
+	border: none;
+}
+
+#modify:hover{
+	background-color: darkolivegreen;
+}
+

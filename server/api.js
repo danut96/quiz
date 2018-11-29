@@ -83,13 +83,15 @@ module.exports = function(app, passport){
             if(err) throw err;
             if(rows.length > 0) res.render('admin.ejs', {user: req.user, success: 1});
         });
+        res.redirect('/logout');
     });
 
-    // DELETE USER
+    // DELETE USER (CANT DELETE AN ADMIN)
     app.get('/deleteuser', admin(), (req, res, next) => {
-        sql.query(`DELETE FROM users WHERE username= '${req.query.username}'`, (err, rows) => {
+        sql.query(`DELETE FROM users WHERE username= '${req.query.username}' AND admin = 0`, (err, rows) => {
             if(rows.length > 0) res.render('admin.ejs', {user: req.user, success: 1});
         });
+        res.redirect('/logout');
     });
 
     // GET HOMEPAGE
@@ -278,5 +280,21 @@ module.exports = function(app, passport){
             });
         }
         // res.render('profile.ejs', {user: req.user, score: scores});
+    });
+
+    // MODIFY DB 
+    app.post('/editquest', admin(), (req, res, next) => {
+        for(let i = 0; i < req.body.edQ.length; i++){
+        sql.query(`UPDATE questions SET question = '${req.body.edQ[i].question}' WHERE ID = ${req.body.edQ[i].id}`, (err, rows) => {
+            if(err) throw err;
+        })}
+        for(let i = 0; i < req.body.edA.length; i++){
+            for(let j = 0; j < req.body.edA[i].length; j++){
+            sql.query(`UPDATE answers SET answer = '${req.body.edA[i][j].answer}' WHERE ID = ${req.body.edA[i][j].id}`, (err, rows) => {
+                if(err) throw err;
+                });
+            }
+        }
+        res.redirect('/modify');
     });
 }

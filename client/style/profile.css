@@ -24,6 +24,12 @@
 	display: block;
 }
 
+#info{
+	text-align: left;
+	padding: 16px;
+	font-size: 20px;
+}
+
 #dropbtn {
     background-color:white;
     color: black;

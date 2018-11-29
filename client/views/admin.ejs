@@ -35,7 +35,7 @@
 <div id="addQuest">
     <button onclick="addSub();"> Adauga un subiect nou </button>
     <button onclick="addQuest();"> Adauga o noua intrebare </button>
-    <button> Modifica un subiect/intrebare </button>
+    <button onclick="modifyQuest();"> Modifica o intrebare/raspuns </button>
     <button> Sterge subiecte/intrebari </button>
     <button onclick="deleteUser();"> Sterge un user </button>
     <button onclick="admin();"> Acorda drept de admin </button>
@@ -47,22 +47,39 @@
     </form>
     
     <form id="addquestion" action="/addquestion", method="get" style="display:none">
-    <select name="subject" form="addquestion" id="selectSubj">Alege subiectul intrebarii</select> <br>
+        <select name="subject" form="addquestion" class="selectSubj"> 
+            <option value="" selected disabled hidden>Alege subiectul intrebarii</option>
+        </select> <br>
         <input type="text" name="question" placeholder="adauga o noua intrebare" required><br>
         <div id="ans" >
         </div><br>
         <input class="add" type="submit" value=" + ">
     </form>
+
     <form id="deleteuser" action="/deleteuser", method="get" style="display:none">
+        <label style="color:red; padding: 5px; text-align: center; ">Dupa efectuarea stergerii, vei fi redirectionat catre pagina de logare.</label>
         <input type="text" name="username" placeholder="introdu numele userului" required>
         <input class="add" type="submit" value=" - ">
     </form>
+
     <form id="administrator" action="/administrator", method="get" style="display:none">
+        <label style="color:red; padding: 5px; text-align: center;">Dupa efectuarea modificarii, vei fi redirectionat catre pagina de logare.</label>
         <input type="text" name="username" placeholder="introdu numele userului" required>
         <input class="add" type="submit" value=" + ">
     </form>
+
+    <select name="subject" class="selectSubj" style="display:none" onchange="reqQuest();">
+        <option value="" selected disabled hidden>Alege subiectul intrebarii</option>
+    </select> <br>
+    <ul id="questList" style="display:none" spellcheck="false"> 
+        <!-- Display questions and answers(inside another 'ul' for each question)-->
+    </ul>
+    <button id="modify" style="display:none" onclick="editQuest();">Modifica</button>
 </div>
     
-<div id="footer"></div>
+<div id="footer">
+Copyright &copy; 2018, ezquiz.com<br>
+Contact us : contact@ezquiz.com | +1234568758
+</div>
 </body>
 </html>
