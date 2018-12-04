@@ -17,13 +17,14 @@ body{
 }
 
 #navbar{
+	z-index: 500;
 	background-color: black;
 	margin: 0px;
 }
 
 
 #main{
-	height: 500px;
+	height: 600px;
 	padding: 25px;
 	background-color: white;
 	margin-left: 221px;
@@ -232,7 +233,7 @@ body{
 	margin-right:20%;
 	margin-bottom: 10px;
 	height: 15px;
-	background-color:  #FF6D31;
+	background-color:  greenyellow;
 	width: 0%;
 	text-align: left;
 	color: black;

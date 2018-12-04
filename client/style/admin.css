@@ -23,9 +23,11 @@
 }
 
 #selected{
+	padding-top: 20px;
+	padding-bottom: 20px;
 	background-color: white;
 	width: 100%;
-	padding: 30px;
+	/* height: 500px; */
 }
 
 #addsubject, #addquestion, #deleteuser, #administrator{
@@ -58,7 +60,6 @@
 }
 
 .selectSubj{
-
 	background-color: #73B66B;
 	width: 430px;
 	padding: 20px;
@@ -67,34 +68,49 @@
 	outline: none;
 }
 
-#questList{
+#questList, #quest{
 	margin-left: 20%;
 	list-style: none;
 	padding: 20px;
 	font-size: 20px;
 }
 
-#questList li{
+#questList li, #quest li{
 	padding: 3px;
 }
 
-#questList ul{
+#quest li:hover{
+	background-color: lightcoral;
+	cursor: pointer;
+}
+
+
+#questList ul, #quest ul{
 	margin-left: 10%;
 	padding: 5px;
 	list-style: none;
 	font-size: 20px;
 }
 
-#modify{
+
+#deleteSubj, .modify{
+	display: block;
 	padding: 20px;
 	background-color: yellowgreen;
-	width: 200px;
+	/* width: 200px; */
 	font-size: 25px;
 	margin: auto;
 	border: none;
 }
 
-#modify:hover{
+.modify:hover{
 	background-color: darkolivegreen;
 }
+
+#delete{
+	width: 500px;
+	margin: auto;
+}
+
+
 

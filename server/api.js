@@ -46,7 +46,7 @@ module.exports = function(app, passport){
             if(err) throw err;
             // ADD ANSWER IF IT DOESN'T ALREADY EXIST IN DB
             for(let i = 0; i < Object.keys(req.query).length - 4; i++){
-                sql.query(`INSERT IGNORE INTO answers VALUES(${rows.length + i + 1}, '${req.query[`${i}`]}')`, (err, result) => {
+                sql.query(`INSERT IGNORE INTO answers VALUES(${rows[rows.length-1].ID + i + 1}, '${req.query[`${i}`]}')`, (err, result) => {
                     if(err) throw err;    
                     if(i === Object.keys(req.query).length - 5) {
                         // ADD CORRECT ANSWER
@@ -54,7 +54,7 @@ module.exports = function(app, passport){
                             if(err) throw err;
                             sql.query(`SELECT * FROM correct_ans`, (err, bla) => {
                                 if(err) throw err;
-                                sql.query(`INSERT INTO correct_ans VALUES(${bla.length + 1}, ${bla.length + 1}, ${rowss[0].ID})`);
+                                sql.query(`INSERT INTO correct_ans VALUES(${bla[bla.length-1].ID + 1}, ${bla.length + 1}, ${rowss[0].ID})`);
                             });
                         });
                         // MATCH QUESTION WITH ANSWERS
@@ -64,7 +64,7 @@ module.exports = function(app, passport){
                                 for(let i = 0; i < Object.keys(req.query).length - 4; i++){
                                     sql.query(`SELECT * FROM answers where answer = '${req.query[`${i}`]}'`, (err, blab) => {
                                         if(err) throw err;
-                                        sql.query(`INSERT INTO quiz_table VALUES(${rowss.length + i + 1}, ${bla[0].ID}, ${blab[0].ID})`);
+                                        sql.query(`INSERT INTO quiz_table VALUES(${rowss[rowss.length-1].ID + i + 1}, ${bla[0].ID}, ${blab[0].ID})`);
                                     });
                                 }
                             });
@@ -92,6 +92,44 @@ module.exports = function(app, passport){
             if(rows.length > 0) res.render('admin.ejs', {user: req.user, success: 1});
         });
         res.redirect('/logout');
+    });
+
+    // DELETE SUBJECT
+    app.get('/deletesubject/:id', admin(), (req, res, next) => {
+        sql.query(`SELECT * FROM questions WHERE subjectID = ${req.params.id}`, (err, rows) => {
+            if(err) throw err;
+            if(rows.length === 0) {
+                sql.query( `DELETE FROM subjects WHERE ID = ${req.params.id}`);
+                res.render('admin.ejs', {user: req.user, success: 1});
+            }
+            for(let i = 0; i < rows.length; i++){
+                sql.query(`DELETE FROM correct_ans WHERE quest_id = ${rows[i].ID}`, (err, rows2) => {
+                    if(err) throw err;
+                    sql.query(`DELETE FROM quiz_table WHERE quest_id = ${rows[i].ID} `, (err, rows3) => {
+                        if(err) throw err;
+                        sql.query(`DELETE FROM questions WHERE ID = ${rows[i].ID}`);
+                    });
+                });
+                if(i === rows.length - 1) {
+                    sql.query( `DELETE FROM subjects WHERE ID = ${req.params.id}`);
+                    res.render('admin.ejs', {user: req.user, success: 1});
+                }
+            }
+        });
+    });
+
+    // DELETE QUESTION
+    app.post('/deletequestions', admin(), (req, res, next) => {
+        for(let i = 0; i < req.body.del.length; i++){
+            sql.query(`DELETE FROM correct_ans WHERE quest_id = ${ req.body.del[i]}`, (err, rows2) => {
+                if(err) throw err;
+                sql.query(`DELETE FROM quiz_table WHERE quest_id = ${req.body.del[i]} `, (err, rows3) => {
+                    if(err) throw err;
+                    sql.query(`DELETE FROM questions WHERE ID = ${req.body.del[i]}`);
+                });
+            });
+        }
+        res.render('admin.ejs', {user: req.user, success: 1});
     });
 
     // GET HOMEPAGE
@@ -158,30 +196,44 @@ module.exports = function(app, passport){
     }
 
     app.get('/quiz/:id', authenticationMiddleware(),(req, res, next) => {
-        sql.query(`SELECT questions.ID, questions.question, answers.answer, answers.ID as ans_id 
-            FROM questions, quiz_table
-            INNER JOIN answers ON quiz_table.ans_id = answers.ID  
-            WHERE subjectID = ${req.params.id} AND quiz_table.quest_id = questions.ID
-            ORDER BY questions.ID` ,
-            function(err, result, fields){
-                if(err) throw err;
-                // var shuffd = [];
-                // for(let i = 0; i < result.length; i++){
-                //     shuffd[i] = i;
-                // }
-                // shuffle(shuffd);
-                // if(result.length > 3) {
-                //     var resultt = [];
-                //     console.log(shuffd);
-                //     for(let j = 0; j < 3; j++){
-                //         resultt[j] = result[shuffd[j]];
-                //         if(j === 3) res.send(resultt);
-                //     }
-                // }else{
-                //     res.send(result);
-                // }
-                res.send(result);
-                
+        var resultt = [];
+        sql.query(`SELECT ID FROM questions WHERE subjectID = ${req.params.id}`, (err, rows) => {
+            if(err) throw err;
+            var shuffd = [];
+            for(let i = 0; i < rows.length; i++){
+                shuffd[i] = i;
+            }
+            shuffle(shuffd);
+            if(rows.length > 15) {
+                for(let j = 0; j < 15; j++){
+                    sql.query(`SELECT questions.ID, questions.question, answers.answer, answers.ID as ans_id 
+                    FROM questions, quiz_table
+                    INNER JOIN answers ON quiz_table.ans_id = answers.ID  
+                    WHERE subjectID = ${req.params.id} AND quiz_table.quest_id = questions.ID AND questions.ID = ${rows[shuffd[j]].ID}
+                    ORDER BY questions.ID` ,
+                    function(err, result, fields){
+                        if(err) throw err;
+                        for(let k = 0; k < result.length; k++){
+                            resultt.push(result[k]);
+                        }
+                        if(j === 14) {
+                            console.log(resultt);
+                            res.send(resultt);
+                        }
+                    });
+                }
+            }else{
+                sql.query(`SELECT questions.ID, questions.question, answers.answer, answers.ID as ans_id 
+                    FROM questions, quiz_table
+                    INNER JOIN answers ON quiz_table.ans_id = answers.ID  
+                    WHERE subjectID = ${req.params.id} AND quiz_table.quest_id = questions.ID
+                    ORDER BY questions.ID` ,
+                    function(err, result, fields){
+                        if(err) throw err;
+                        res.send(result);
+                    });
+            }
+            
         });
     });
 

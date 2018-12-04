@@ -7,7 +7,6 @@
 <link rel = "stylesheet" type = "text/css" href = "admin.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="quiz.js"></script>
-<script type="text/javascript" src="admin.js"></script>
 </head>
 <body onload="user();">
 <div id="header"><h1>ezquiz.com</h1></div>
@@ -36,7 +35,7 @@
     <button onclick="addSub();"> Adauga un subiect nou </button>
     <button onclick="addQuest();"> Adauga o noua intrebare </button>
     <button onclick="modifyQuest();"> Modifica o intrebare/raspuns </button>
-    <button> Sterge subiecte/intrebari </button>
+    <button onclick="deleteQ();"> Sterge subiecte/intrebari </button>
     <button onclick="deleteUser();"> Sterge un user </button>
     <button onclick="admin();"> Acorda drept de admin </button>
 </div>
@@ -74,12 +73,24 @@
     <ul id="questList" style="display:none" spellcheck="false"> 
         <!-- Display questions and answers(inside another 'ul' for each question)-->
     </ul>
-    <button id="modify" style="display:none" onclick="editQuest();">Modifica</button>
+    <button class="modify" style="display:none" onclick="editQuest();">Modifica</button>
+
+    <div id='delete' style="display:none">
+    <label style="color:red; padding: 5px; text-align: center; "><strong>ATENTIE</strong>: Subiectul selectat va fi sters impreuna cu toate intrebarile adiacente.</label><br>
+    <select name="subject" class="selectSubj">
+        <option value="" selected disabled hidden>Alege subiectul</option>
+    </select>
+        <button class="modify" onclick="deleteSubject();"> Sterge subiectul </button>
+        <button class="modify" onclick="questionsToBeDeleted();"> Sterge intrebari de la acest subiect </button>
+        <ul id="quest"></ul>
+        <button class="modify" onclick="deleteqq();" style="display:none"> Sterge intrebarile selectate</button>
+    </div>
 </div>
     
 <div id="footer">
 Copyright &copy; 2018, ezquiz.com<br>
 Contact us : contact@ezquiz.com | +1234568758
 </div>
+<script type="text/javascript" src="admin.js"></script>
 </body>
 </html>

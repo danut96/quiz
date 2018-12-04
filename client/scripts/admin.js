@@ -18,14 +18,23 @@ function createSubject(){
 	    if(req3.readyState === 4 && req3.status === 200){
 			sub = JSON.parse(req3.responseText);
 			for(let i = 0; i < sub.length; i++){
+                if(i === 0){
+                    child4 = document.createElement("option");
+                    child4.setAttribute('value', ``);
+                    document.getElementsByClassName("selectSubj")[2].append(child4);
+                }       
                 child = document.createElement("option");
                 child2 = document.createElement("option");
+                child3 = document.createElement("option");
                 child.innerHTML = sub[i].subject.replace('_', ' ');
                 child2.innerHTML = sub[i].subject.replace('_', ' ');
+                child3.innerHTML = sub[i].subject.replace('_', ' ');
                 child.setAttribute('value', `${sub[i].ID}`);
                 child2.setAttribute('value', `${sub[i].ID}`);
+                child3.setAttribute('value', `${sub[i].ID}`);
                 document.getElementsByClassName("selectSubj")[0].append(child);   
-                document.getElementsByClassName("selectSubj")[1].append(child2);         
+                document.getElementsByClassName("selectSubj")[1].append(child2);  
+                document.getElementsByClassName("selectSubj")[2].append(child3);
             }
 		}
 	};
@@ -86,7 +95,7 @@ function modifyQuest(){
 }
 
 function reqQuest(){
-    document.getElementById("modify").style.display = 'block';
+    document.getElementsByClassName("modify")[0].style.display = 'block';
     var list = document.getElementById("questList");
     while (list.hasChildNodes()) {   
         list.removeChild(list.firstChild);
@@ -195,4 +204,105 @@ function editQuest(){
         edQ: editedQ, 
         edA: editedA
     }));
+}
+
+function deleteQ(){
+    displaySelected();
+    document.getElementById("delete").style.display = "block";
+    createSubject();
+}
+
+
+toBeDeleted = []
+
+function questionsToBeDeleted(){
+    document.getElementsByClassName("modify")[3].style.display = "block";
+    var list = document.getElementById("quest");
+    while (list.hasChildNodes()) {   
+        list.removeChild(list.firstChild);
+    }
+    list.style.display = "block";
+    // literal questions and answers
+    questions = [];
+    answers = [];
+    // questions and answers by their id's (same arrays as above, but not literal)
+	quest_id = [];
+	answ_id =[];
+    var e = document.getElementsByClassName("selectSubj")[2];
+    var b = e.value;
+    var req = new XMLHttpRequest();
+    req.open('GET', `/quiz/${b}`);
+    req.onreadystatechange = () => {
+        if(req.readyState === 4 && req.status === 200) {
+            var a = JSON.parse(req.responseText);
+            var x = 0;
+            var i = 0;
+            var poz = 0;
+            while(i < a.length){
+                answers[x] = [];
+                answ_id[x] = [];
+                questions[x] = a[i].question;
+                quest_id[x] = a[i].ID;
+                var p = 0;
+                while(i < a.length && a[poz].ID === a[i].ID && i < a.length){
+                    answers[x][p] = a[i].answer;
+                    answ_id[x][p] = a[i].ans_id;
+                    p++;
+                    i++;
+                }
+                poz += p;
+                x++;
+            }
+        }
+        // create List Item for each question and define onclick attribute
+        for(let i = 0; i < questions.length; i++){
+            var child = document.createElement("LI");
+            child.innerHTML = questions[i];
+            list.appendChild(child);
+            child.onclick = (e) => {
+                e.stopPropagation();
+                var c = document.getElementsByTagName("LI")[i].style.backgroundColor;
+                if(c === ""){
+                    list.getElementsByTagName("LI")[i].style.backgroundColor = "lightcoral";
+                    if(!toBeDeleted.includes(quest_id[i]))toBeDeleted.push(quest_id[i]);
+                }
+                else{
+                    list.getElementsByTagName("LI")[i].style.backgroundColor = "";
+                    for(var j = toBeDeleted.length - 1; j >= 0; j--) {
+                        if(toBeDeleted[j] === quest_id[i]) {
+                           toBeDeleted.splice(j, 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    req.send();
+}
+
+function deleteSubject(){
+    subj = document.getElementsByClassName("selectSubj")[2].value;
+    if(subj !== ''){
+        var req = new XMLHttpRequest();
+        req.open('GET', `/deletesubject/${subj}`);
+        req.onreadystatechange = () => {
+            if(req.status === 200 && req.readyState === 4) {
+                window.location = "/modify";
+            }
+        }
+        req.send();
+    }
+}
+
+function deleteqq(){
+    console.log(toBeDeleted);
+    var req = new XMLHttpRequest();
+    req.open('POST', "/deletequestions");
+    req.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+    req.onreadystatechange = () => {
+        if(req.status === 200 && req.readyState === 4 ){
+            window.location = "/modify";
+        }
+    }
+    req.send(JSON.stringify({del: toBeDeleted}));
 }
