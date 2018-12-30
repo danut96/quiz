@@ -11,11 +11,11 @@ function createDB(){
     con.connect(err => {
         if(err) throw err;
         console.log("Connected.");
-        con.query("CREATE DATABASE quizz", (err, res) => {
+        con.query("CREATE DATABASE quiz", (err, res) => {
             if(err) throw err;
             else{
                 console.log("Database created.");
-                cmd.run("mysql -u root -ppassword quizz < quiz.sql");
+                cmd.run("mysql -u root -ppassword quiz < quiz.sql");
                 con.end();
             }
         });
