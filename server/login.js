@@ -21,7 +21,7 @@ module.exports = function(passport){
     },
     function(req, username, password, done) {
             // find user
-            // we are checking to see if the user trying to login already exists
+            // we are checking to see if the user trying to signup already exists
             sql.query("select * from users where username = '"+ username +"'", function(err,rows){
                 if (err) return done(err);
                 if (rows.length) {

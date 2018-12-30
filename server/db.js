@@ -4,10 +4,8 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "password",
-    database: "quiz"
+    database: "quizz"
 });
 
 con.connect();
-
-
 module.exports = con;
